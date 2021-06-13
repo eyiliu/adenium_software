@@ -1,0 +1,15 @@
+{
+    "telescope":{
+        "locations":{
+            "red":    0,
+            "orange": 20,
+            "yellow": 40,
+            "green":  60,
+            "cyan":   80,
+            "blue":   100
+        },
+        "config":{
+            
+        }
+    }
+}

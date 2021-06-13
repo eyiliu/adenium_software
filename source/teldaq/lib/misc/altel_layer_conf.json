@@ -1,0 +1,95 @@
+{    
+    "layers":[
+        {
+            "name":"red",
+            "data_link":{
+                "protocol":"tcp",
+                "version": 1,
+                "description":"ALPIDE plane TCP raw reader",
+                "options":{
+                    "ip":"131.169.133.170",
+                    "port":9000
+                }
+            }
+        },
+
+        {
+            "name":"orange",
+            "data_link":{
+                "protocol":"tcp",
+                "version": 1,
+                "description":"ALPIDE plane TCP raw reader",
+                "options":{
+                    "ip":"131.169.133.171",
+                    "port":9000
+                }
+            }
+        },
+
+        {
+            "name":"yellow",
+            "data_link":{
+                "protocol":"tcp",
+                "version": 1,
+                "description":"ALPIDE plane TCP raw reader",
+                "options":{
+                    "ip":"131.169.133.172",
+                    "port":9000
+                }
+            }
+        },
+
+        {
+            "name":"green",
+            "data_link":{
+                "protocol":"tcp",
+                "version": 1,
+                "description":"ALPIDE plane TCP raw reader",
+                "options":{
+                    "ip":"131.169.133.173",
+                    "port":9000
+                }
+            }
+        },
+
+        {
+            "name":"cyan",
+            "data_link":{
+                "protocol":"tcp",
+                "version": 1,
+                "description":"ALPIDE plane TCP raw reader",
+                "options":{
+                    "ip":"131.169.133.174",
+                    "port":9000
+                }
+            }
+        },
+        
+        {
+            "name":"blue",
+            "data_link":{
+                "protocol":"tcp",
+                "version": 1,
+                "description":"ALPIDE plane TCP raw reader",
+                "options":{
+                    "ip":"131.169.133.175",
+                    "port":9000
+                }
+            }
+        },
+
+        {
+            "name":"purple",
+            "data_link":{
+                "protocol":"tcp",
+                "version": 1,
+                "description":"ALPIDE plane TCP raw reader",
+                "options":{
+                    "ip":"131.169.133.168",
+                    "port":24
+                }
+            }
+        }
+        
+    ]
+}

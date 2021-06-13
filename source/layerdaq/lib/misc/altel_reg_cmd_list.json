@@ -1,0 +1,1266 @@
+{
+    "CHIP_REG_LIST":[
+	{
+	    "name":"CHIP_CMD",
+	    "address":"0x0000",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Command Register"
+	},
+	{
+	    "name":"CHIP_MODE",
+	    "address":"0x0001",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x01FC",
+	    "description":"Mode Control register",
+            "bits":[
+                {
+                    "address":[1,0],
+                    "init":0,
+                    "description":"Chip Mode selector; 0:Configuration Mode, 1:Triggered Mode, 2:Continuous Mode"
+                },
+                {
+                    "address":2,
+                    "init":1,
+                    "description":"Clustering enable; 0:Disable clustering of nearby hits, 1:Enable"
+                },
+                {
+                    "address":3,
+                    "init":1,
+                    "description":"Matrix Readout Speed; 0: Readout of one pixel hit in each region every four clock(10 MHz) 1:two clock(20 MHz)"
+                },
+                {
+                    "address":[5,4],
+                    "init":3,
+                    "description":"IB Serial Link Speed; 0:400Mb/s, 1:600Mb/s, 2,3:1200Mb/s"
+                },
+                {
+                    "address":6,
+                    "init":1,
+                    "description":"Enable Skewing of Global Signals; 0:disable, 1:enable"
+                },
+                {
+                    "address":7,
+                    "init":1,
+                    "description":"Enable Skewing of Start of Readout; 0:disable, 1:enable"
+                },
+                {
+                    "address":8,
+                    "init":1,
+                    "description":"Enable Readout Clock Gating; 0:disable, 1:enable"
+                },
+                {
+                    "address":9,
+                    "init":0,
+                    "description":"Enable Readout From CMU; 0:disable, 1:enable"
+                }                
+            ]
+	},
+	{
+	    "name":"DISABLE_REGIONS",
+	    "address":[
+		"DISABLE_REGIONS_L",
+		"DISABLE_REGIONS_H"
+	    ],
+	    "bytes":4,
+	    "words":2,
+	    "endian":"LE",
+	    "read":true,
+	    "write":true,
+	    "description":"Disable of regions"
+	},
+	{
+	    "name":"DISABLE_REGIONS_L",
+	    "address":"0x0002",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Disable of regions 0-15"
+	},
+	{
+	    "name":"DISABLE_REGIONS_H",
+	    "address":"0x0003",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Disable of regions 16-31"
+	},
+	{
+	    "name":"FROMU_CONF_1",
+	    "address":"0x0004",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0010",
+	    "description":"FROMU Configuration Register 1,  ",
+            "bits":[
+                {"2:0":"Pixel MEB Mask 0"},
+                {"3":"Internal STROBE generation 0"},
+                {"4":"Enable BUSY Monitoring 1, exteral busy as internal busy"},
+                {"5":"Test Pulse Mode 0, 0:digital;1:analogy"},
+                {"6":"Enable Test STROBE 0"},
+                {"7":"Enable Rotate Pulse Lines 0"},
+                {"10:8":"Trigger Delay 0"},
+                {"15:11":"not used"}
+            ]
+	},
+	{
+	    "name":"FROMU_CONF_2",
+	    "address":"0x0005",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0014",
+	    "description":"Duration of the STROBE pulses, n+1 clk. 0->25ns, max 1638.4us "
+	},
+	{
+	    "name":"FROMU_CONF_3",
+	    "address":"0x0006",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Duration of the gap between subsequent STROBE pulses when the internal sequencer is activated. n+1 clk"
+	},
+	{
+	    "name":"FROMU_PULSING_1",
+	    "address":"0x0007",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Delay from the PULSE signal to the STROBE signal when the automatic generation of STROBE following PULSE is enabled. n+1 clk"
+	},
+	{
+	    "name":"FROMU_PULSING_2",
+	    "address":"0x0008",
+	    "bytes":2,
+	    "words":"1",
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Duration of the PULSE signal. n clk, 0=disabled"
+	},
+	{
+	    "name":"FROMU_STATUS_1",
+	    "address":"0x0009",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":"trigger counter"
+	},
+	{
+	    "name":"FROMU_STATUS_2",
+	    "address":"0x000a",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":"STROBE counter"
+	},
+	{
+	    "name":"FROMU_STATUS_3",
+	    "address":"0x000b",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":"Matrix Readout counter (finsh talk to downstream Region Readout Units)"
+	},
+	{
+	    "name":"FROMU_STATUS_4",
+	    "address":"0x000c",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":"Frame counter (start talk to upstream Top Readout Unit)"
+	},
+	{
+	    "name":"FROMU_STATUS_5",
+	    "address":"0x000d",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":"FROMU Status Register 5",
+            "bits":[
+                {"11:0":"Bunch Counter"},
+                {"14:12":"Events in in-pixel Multi-Event Buffers"},
+                {"15":"STROBE/Frame window extended"}
+            ]
+	},
+	{
+	    "name":"ADC_FOR_DCLK_MCLK",
+	    "address":"0x000e",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0aaa",
+	    "description":"DAC settings for DCLK and MCLK I/O buffers"
+	},
+	{
+	    "name":"ADC_FOR_CMU",
+	    "address":"0x000f",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x00aa",
+	    "description":"DAC settings for CMU I/O buffers"
+	},
+	{
+	    "name":"CMU_DMU_CONF",
+	    "address":"0x0010",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x004f",
+	    "description":"CMU and DMU Configuration Register"
+	},
+	{
+	    "name":"CMU_DMU_STATUS",
+	    "address":"0x0011",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":"CMU and DMU Status Register"
+	},
+	{
+	    "name":"DMU_FIFO",
+	    "address":[
+		"DMU_FIFO_L",
+		"DMU_FIFO_H"
+	    ],
+	    "bytes":4,
+	    "words":2,
+	    "endian":"LE",
+	    "read":true,
+	    "write":false,
+	    "description":"DMU Data FIFO"
+	},
+	{
+	    "name":"DMU_FIFO_L",
+	    "address":"0x0012",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":"DMU Data FIFO [15:0]"
+	},
+	{
+	    "name":"DMU_FIFO_H",
+	    "address":"0x0013",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":"DMU Data FIFO [23:16]"
+	},
+	{
+	    "name":"DTU_CONF",
+	    "address":"0x0014",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x008d",
+	    "description":"DTU Configuration Register"
+	},
+	{
+	    "name":"DTU_DAC",
+	    "address":"0x0015",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0088",
+	    "description":"DTU DACs Register"
+	},
+	{
+	    "name":"DTU_PLL_LOCK_1",
+	    "address":"0x0016",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":"DTU PLL Lock Register 1"
+	},
+	{
+	    "name":"DTU_PLL_LOCK_2",
+	    "address":"0x0017",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"DTU PLL Lock Register 2"
+	},
+	{
+	    "name":"DUT_TEST_1",
+	    "address":"0x0018",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"DTU Test Register 1"
+	},
+	{
+	    "name":"DUT_TEST_2",
+	    "address":"0x0019",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"DTU Test Register 2"
+	},
+	{
+	    "name":"DUT_TEST_3",
+	    "address":"0x001a",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"DTU Test Register 3"
+	},
+	{
+	    "name":"BUSY_MIN_WIDTH",
+	    "address":"0x001b",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0008",
+	    "description":"BUSY min width"
+	},
+        
+        {
+	    "name":"REGION_DISABLE_DOUBLE_COLUMN",
+	    "address":"0x0300",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Double Column Disable Register. Disable double column Priority Encoder"
+
+        },
+        {
+	    "name":"REGION_STATUS",
+	    "address":"0x0301",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Region Status Register, [0]: pixel status; [1]: memory status; [2]:All Column Disabled; [3:15] not used "
+        },
+	{
+	    "name":"REGION_COLUMN_SELECT",
+	    "address":[
+		"REGION_COLUMN_SELECT_L",
+		"REGION_COLUMN_SELECT_H"
+	    ],
+	    "bytes":4,
+	    "words":2,
+	    "endian":"LE",
+	    "read":true,
+	    "write":true,
+	    "description":"Column Selection"
+	},
+        {
+	    "name":"REGION_COLUMN_SELECT_L",
+	    "address":"0x0401",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0xffff",
+	    "description":"Column Selection Slice 1 (LOW)"
+        },
+        {
+	    "name":"REGION_COLUMN_SELECT_H",
+	    "address":"0x0402",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0xffff",
+	    "description":"Column Selection Slice 2 (HIGH)"
+        },
+        {
+	    "name":"REGION_ROW_SELECT",
+	    "address":"0x0404",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0xffff",
+	    "description":"Row Selection Slice, 16bits x 32regions = 512 row selection lines for global matrix"
+        },
+        {
+	    "name":"REGION_PULSE_SELECT_DOUBLE_COLUMN",
+	    "address":"0x0408",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0xffff",
+	    "description":"Pulse Selection Slice,  double column selection for test pulse"
+        },
+        {
+            "name":"REGION_TOGGLE_COLUMN_L",
+            "address":"0x0411",
+	    "bytes":2,
+	    "words":1,
+	    "read":false,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Regional, toggle column selection, low. Payload data is ignored"
+        },
+        {
+            "name":"REGION_TOGGLE_COLUMN_H",
+            "address":"0x0412",
+	    "bytes":2,
+	    "words":1,
+	    "read":false,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Regional, toggle column selection, high. Payload data is ignored"
+        },
+        {
+            "name":"REGION_TOGGLE_COLUMN",
+            "address":"0x0413",
+	    "bytes":2,
+	    "words":1,
+	    "read":false,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Regional, toggle column selection. Payload data is ignored"
+        },
+        {
+            "name":"REGION_TOGGLE_ROW",
+            "address":"0x0414",
+	    "bytes":2,
+	    "words":1,
+	    "read":false,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Regional, toggle row selection. Payload data is ignored"
+        },
+        {
+            "name":"REGION_TOGGLE_COLUMN_ROW",
+            "address":"0x0417",
+	    "bytes":2,
+	    "words":1,
+	    "read":false,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Regional, toggle comumn and row selection. Payload data is ignored"
+        },
+	{
+	    "name":"PIX_CONF_GLOBAL",
+	    "address":"0x0500",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Pixel Configuration Register, [0]: ROWREGM_SEL (NOTE mismath between manuals: true:MASK_EN at p3 manual, true:PULSE_EN at alpide manual, using later); [1]: PIXCNFG_DATA"
+	}, 
+	{
+	    "name":"ANALOG_MON_OVERRIDE",
+	    "address":"0x0600",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0400",
+	    "description":"Analog Monitor and Override"
+	},
+	{
+	    "name":"VRESETP",
+	    "address":"0x0601",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0075",
+            "nominal":117,
+	    "description":"VRESETP"
+	},
+	{
+	    "name":"VRESETD",
+	    "address":"0x0602",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+            "nominal":147,
+	    "description":"VRESETD"
+	},
+	{
+	    "name":"VCASP",
+	    "address":"0x0603",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0056",
+            "nominal":86,
+	    "description":"VCASP"
+	},
+	{
+	    "name":"VCASN",
+	    "address":"0x0604",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0039",
+            "nominal":57,
+	    "description":"VCASN Chenfei50"
+	},
+	{
+	    "name":"VPULSEH",
+	    "address":"0x0605",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x00ff",
+            "nominal":255,
+	    "description":"VPULSE high"
+	},
+	{
+	    "name":"VPULSEL",
+	    "address":"0x0606",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+            "nominal":0,
+	    "description":"VPULSE low"
+	},
+	{
+	    "name":"VCASN2",
+	    "address":"0x0607",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0040",
+            "nominal":62,
+	    "description":"VCASN2 Chenfei63"
+	},
+	{
+	    "name":"VCLIP",
+	    "address":"0x0608",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+            "nominal":0,
+	    "description":"VCLIP"
+	},
+	{
+	    "name":"VTEMP",
+	    "address":"0x0609",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"VTEMP"
+	},
+	{
+	    "name":"IAUX2",
+	    "address":"0x060a",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"IAUX2"
+	},
+	{
+	    "name":"IRESET",
+	    "address":"0x060b",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0032",
+            "nominal":50,
+	    "description":"IRESET"
+	},
+	{
+	    "name":"IDB",
+	    "address":"0x060c",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0040",
+            "nominal":64,
+	    "description":"IDB"
+	},
+	{
+	    "name":"IBIAS",
+	    "address":"0x060d",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0040",
+            "nominal":64,
+	    "description":"IBIAS"
+	},
+	{
+	    "name":"ITHR",
+	    "address":"0x060e",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0033",
+            "nominal":51,
+	    "description":"ITHR, threshold"
+	},
+	{
+	    "name":"BUFF_BYPASS",
+	    "address":"0x060f",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Buffer Bypass Register"
+	},
+	{
+	    "name":"ADC_CTRL",
+	    "address":"0x0610",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0400",
+	    "description":"ADC Control Register"
+	},
+	{
+	    "name":"ADC_DAC_INPUT",
+	    "address":"0x0611",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"ADC DAC input value"
+	},
+	{
+	    "name":"ADC_CALIB",
+	    "address":"0x0612",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":"ADC Calibration Value Register"
+	},
+	{
+	    "name":"TEST_CTRL",
+	    "address":"0x0701",
+	    "bytes":2,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x0000",
+	    "description":"Test Control Register"
+	}
+    ],
+
+    
+    "CHIP_CMD_LIST":[
+	{
+	    "name":"GRST",
+	    "value":"0x00d2",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Chip global reset"
+	},
+	{
+	    "name":"PRST",
+	    "bytes":2,
+	    "words":1,
+	    "value":"0x00e4",
+	    "description":"Pixel matrix RESET, The PULSE_EN and MASK_EN latches are not affected by PRST"
+	},
+	{
+	    "name":"PULSE",
+	    "value":"0x0078",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Pixel matrix PULSE"
+	},
+	{
+	    "name":"BCRST",
+	    "value":"0x0036",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Bunch Counter reset"
+	},
+	{
+	    "name":"RORST",
+	    "value":"0x0063",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Readout (RRU/TRU/DMU) reset. This command is mandatory to commit the Initial Token bit and activates the driving of the local bus by the chip with the token."
+	},
+	{
+	    "name":"DEBUG",
+	    "value":"0x00aa",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Store snapshot into debug registers"
+	},
+	{
+	    "name":"TRIGGER_B1",
+	    "value":"0x00b1",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Trigger command b1"
+	},
+	{
+	    "name":"TRIGGER_55",
+	    "value":"0x0055",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Trigger command 55"
+	},
+	{
+	    "name":"TRIGGER_C9",
+	    "value":"0x00c9",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Trigger command c9"
+	},
+	{
+	    "name":"TRIGGER_2D",
+	    "value":"0x002d",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Trigger command 2d"
+	},
+	{
+	    "name":"WROP",
+	    "value":"0x009c",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Start Unicast or Multicast Write"
+	},
+	{
+	    "name":"RDOP",
+	    "value":"0x004e",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Start Unicast Read"
+	},
+	{
+	    "name":"CMU_CLEAR_ERR",
+	    "value":"0xff00",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Clear CMU error flags"
+	},
+	{
+	    "name":"FIFOTEST",
+	    "value":"0xff01",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Starts regions memory test"
+	},
+	{
+	    "name":"LOADOBDEFCFG",
+	    "value":"0xff02",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Loads default configuration for the OB Module"
+	},
+	{
+	    "name":"XOFF",
+	    "value":"0xff10",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Stops sending data off-chip"
+	},
+	{
+	    "name":"XON",
+	    "value":"0xff11",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Resume data sending"
+	},
+	{
+	    "name":"ADCMEASURE",
+	    "value":"0xff20",
+	    "bytes":2,
+	    "words":1,
+	    "description":"Start ADC measure"
+	}
+    ],
+
+    
+    "FIRMWARE_CMD_LIST_V3":[
+	{
+	    "name":"BROADCAST",
+	    "value":"0x50",
+	    "bytes":1,
+	    "words":1,
+	    "description":"Broadcast ALPIDE opcode"
+	},
+	{
+	    "name":"WRITE",
+	    "value":"0x9c",
+	    "bytes":1,
+	    "words":1,
+	    "description":"Write data in Data Wrote to ALPIDE register at ALPIDE Register Address"
+	},
+	{
+	    "name":"READ",
+	    "value":"0x4e",
+	    "bytes":1,
+	    "words":1,
+	    "description":"Read data from ALPIDE register at ALPIDE Register Address and store in Data Read"
+	}
+    ],
+
+    "FIRMWARE_REG_LIST_V3":[
+	{
+	    "name":"FIRMWARE_CMD",
+	    "address":"0x43c00044",
+	    "bytes":1,
+	    "words":1,
+	    "read":false,
+	    "write":true,
+	    "reset":"0x00",
+	    "description":"Command Register"
+	},
+	{
+	    "name":"ADDR_CHIP_REG",
+	    "address":[
+		"ADDR_CHIP_REG_L",
+		"ADDR_CHIP_REG_H"
+	    ],
+	    "bytes":2,
+	    "words":2,
+	    "endian":"LE",
+	    "read":true,
+	    "write":true,
+	    "description":"ALPIDE Register Address to Read or Write, 0x43c00008"
+	},
+	{
+	    "name":"ADDR_CHIP_REG_L",
+	    "address":"0x43c00008",
+	    "bytes":1,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x00",
+	    "description":"ALPIDE Register Address to Read or Write, [7:0]"
+	},
+	{
+	    "name":"ADDR_CHIP_REG_H",
+	    "address":"0x43c00009",
+	    "bytes":1,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x00",
+	    "description":"ALPIDE Register Address to Read or Write, [15:8]"
+	},
+	{
+	    "name":"DEVICE_ID",
+	    "address":"0x43c0000c",
+	    "bytes":1,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x00",
+	    "description":"Device ID, layer ID"
+	},
+	{
+	    "name":"DATA_WRITE",
+	    "address":[
+		    "DATA_WRITE_L",
+		    "DATA_WRITE_H"
+	    ],
+	    "bytes":2,
+	    "words":2,
+	    "endian":"LE",
+	    "read":true,
+	    "write":true,
+	    "description":"Data Wrote to ALPIDE Register 0x43c00010"
+	},
+	{
+	    "name":"DATA_WRITE_L",
+	    "address":" 0x43c00010",
+	    "bytes":1,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x00",
+	    "description":"Data Wrote to ALPIDE Register [7:0] "
+	},
+	{
+	    "name":"DATA_WRITE_H",
+	    "address":" 0x43c00011",
+	    "bytes":1,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x00",
+	    "description":"Data Wrote to ALPIDE Register [15:8] "
+	},
+	{
+	    "name":"BROADCAST_OPCODE",
+	    "address":"0x43c00018",
+	    "bytes":1,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x00",
+	    "description":"the OPCODE to broadcast to the ALPIDE DCTRL bus"
+	},
+	{
+	    "name":"TRIG_DELAY",
+	    "address":[
+		"TRIG_DELAY_L",
+		"TRIG_DELAY_H"
+	    ],
+	    "bytes":2,
+	    "words":2,
+	    "endian":"LE",
+	    "read":true,
+	    "write":true,
+	    "description":"Controls the delay from external trigger to DAQ sending trigger to ALPIDE. Value n gives a delay of n clock cycles (minimum 0 and maximum 65535 cycles i.e. from 0 to ~1638 us assuming a clock period of 25 ns), 0x43c0001c"
+	},
+	{
+	    "name":"TRIG_DELAY_L",
+	    "address":"0x43c0001c",
+	    "bytes":1,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x00",
+	    "description":"Trigger Delay in Step of 25 ns[7:0]"
+	},
+	{
+	    "name":"TRIG_DELAY_H",
+	    "address":"0x43c0001d",
+	    "bytes":1,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "reset":"0x00",
+	    "description":"Trigger Delay in Step of 25 ns[15:8]"
+	},
+	{
+	    "name":"COUNT_READ",
+	    "address":"0x43c00034",
+	    "bytes":1,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "reset":"0x00",
+	    "description":"counter of succeed ALPIDE register reading process 0x43c00034"
+	},
+	{
+	    "name":"DATA_READ",
+	    "address":[
+		    "DATA_READ_L",
+		    "DATA_READ_H"
+	    ],
+	    "bytes":2,
+	    "words":2,
+	    "endian":"LE",
+	    "read":true,
+	    "write":false,
+	    "description":"Data Read from ALPIDE Register  0x43c00038"
+	},
+	{
+	    "name":"DATA_READ_L",
+	    "address":"0x43c00038",
+	    "bytes":1,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "reset":"0x00",
+	    "description":"Data Read from ALPIDE Register[7:0] "
+	},
+	{
+	    "name":"DATA_READ_H",
+	    "address":"0x43c00039",
+	    "bytes":1,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "reset":"0x00",
+	    "description":"Data Read from ALPIDE Register[15:8] "
+	},
+	{
+           "name":"FIRMWARE_MODE",
+           "address":"0x43c00040",
+           "bytes":1,
+           "words":1,
+           "read":true,
+           "write":true,
+           "reset":"0x00",
+            "description":"FPGA Working Mode. Bit[7:1] Not used. External trigger mode. Bit[0] =1, ALPIDE samples frame data continuously; =0, ALPIDE IDLE. "
+        }
+    ],
+
+
+    "FIRMWARE_CMD_LIST_V4":[
+	{
+	    "name":"TRIGGER_VETO",
+	    "value":"0xf0000000",
+	    "bytes":4,
+	    "words":1,
+	    "description":""
+	},
+	{
+	    "name":"TRIGGER_ALLOW",
+	    "value":"0xf1000000",
+	    "bytes":4,
+	    "words":1,
+	    "description":""
+	},
+	{
+	    "name":"RESET",
+	    "value":"0xff000000",
+	    "bytes":4,
+	    "words":1,
+	    "description":""
+	},
+	{
+	    "name":"DEVICE0",
+	    "value":"0xfa000000",
+	    "bytes":4,
+	    "words":1,
+	    "description":""
+	},
+	{
+	    "name":"DEVICE1",
+	    "value":"0xfa000001",
+	    "bytes":4,
+	    "words":1,
+	    "description":""
+	},
+	{
+	    "name":"DEVICE2",
+	    "value":"0xfa000002",
+	    "bytes":4,
+	    "words":1,
+	    "description":""
+	},
+	{
+	    "name":"DEVICE3",
+	    "value":"0xfa000003",
+	    "bytes":4,
+	    "words":1,
+	    "description":""
+	},
+	{
+	    "name":"DEVICE4",
+	    "value":"0xfa000004",
+	    "bytes":4,
+	    "words":1,
+	    "description":""
+	},
+	{
+	    "name":"DEVICE5",
+	    "value":"0xfa000005",
+	    "bytes":4,
+	    "words":1,
+	    "description":""
+	},
+	{
+	    "name":"TEST_ID",
+	    "value":"0xfa00000f",
+	    "bytes":4,
+	    "words":1,
+	    "description":""
+	}
+    ],
+
+    "FIRMWARE_REG_LIST_V4":[
+	{
+	    "name":"DAQ_CMD",
+	    "address":"0x43c00000",
+	    "bytes":4,
+	    "words":1,
+	    "read":false,
+	    "write":true,
+	    "description":""
+	},
+	{
+	    "name":"DAQ_CMD_CNT",
+	    "address":"0x43c00004",
+	    "bytes":4,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":""
+	},
+	{
+	    "name":"DAQ_STATUS",
+	    "address":"0x43c00008",
+	    "bytes":4,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":""
+	},
+	{
+	    "name":"DAQ_SOFT_STAMP",
+	    "address":"0x43c0000c",
+	    "bytes":4,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "description":""
+	},
+	{
+	    "name":"DET_READ_ADDR",
+	    "address":"0x43c00010",
+	    "bytes":4,
+	    "words":1,
+	    "read":false,
+	    "write":true,
+	    "description":""
+	},
+	{
+	    "name":"DET_READ_CNT",
+	    "address":"0x43c00014",
+	    "bytes":4,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":""
+	},
+	{
+	    "name":"DET_READ_DATA",
+	    "address":"0x43c00018",
+	    "bytes":4,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":""
+	},
+	{
+	    "name":"DET_READ_STATUS",
+	    "address":"0x43c0001c",
+	    "bytes":4,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":""
+	},
+	{
+	    "name":"DET_WRITE_ADDR",
+	    "address":"0x43c00020",
+	    "bytes":4,
+	    "words":1,
+	    "read":false,
+	    "write":true,
+	    "description":""
+	},
+	{
+	    "name":"DET_WRITE_CNT",
+	    "address":"0x43c00024",
+	    "bytes":4,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":""
+	},
+	{
+	    "name":"DET_WRITE_DATA",
+	    "address":"0x43c00028",
+	    "bytes":4,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":""
+	},
+	{
+	    "name":"DET_WRITE_STATUS",
+	    "address":"0x43c0002c",
+	    "bytes":4,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":""
+	},
+	{
+	    "name":"DET_CMD_OPCODE",
+	    "address":"0x43c00030",
+	    "bytes":4,
+	    "words":1,
+	    "read":false,
+	    "write":true,
+	    "description":""
+	},
+	{
+	    "name":"DET_CMD_CNT",
+	    "address":"0x43c00034",
+	    "bytes":4,
+	    "words":1,
+	    "read":true,
+	    "write":false,
+	    "description":""
+	},
+	{
+	    "name":"DET_CMD_R38",
+	    "address":"0x43c00038",
+	    "bytes":4,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "description":""
+	},
+	{
+	    "name":"DET_CMD_R3c",
+	    "address":"0x43c0003c",
+	    "bytes":4,
+	    "words":1,
+	    "read":true,
+	    "write":true,
+	    "description":""
+	}
+    ]
+
+}

@@ -1,0 +1,10 @@
+add_subdirectory(common)
+if(${CMAKE_SYSTEM_PROCESSOR}  MATCHES "x86_64")
+  add_subdirectory(teldaq)
+  add_subdirectory(eudaq)
+  add_subdirectory(layerdaq)
+endif()
+
+if(${CMAKE_SYSTEM_PROCESSOR}  MATCHES "armv7l")
+  add_subdirectory(layerdaq)
+endif()

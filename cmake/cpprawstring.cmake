@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 3.11)
+
+if( (${CMAKE_ARGC} LESS 5) OR (${CMAKE_ARGC} GREATER 6 ) )
+  message(FATAL_ERROR "create_cpp_raw_string require 5 or 6 arguments, but given ${CMAKE_ARGC}")
+endif()
+if(${CMAKE_ARGC} EQUAL 5)
+  set(RAW_STRING_DELIM "~~~cpp~raw~~~")
+endif()
+if(${CMAKE_ARGC} EQUAL 6)
+  set(RAW_STRING_DELIM ${CMAKE_ARGV5})
+endif()
+
+if( (NOT EXISTS ${CMAKE_ARGV3}) OR (${CMAKE_ARGV4} IS_NEWER_THAN ${CMAKE_ARGV3}) )
+  file(READ ${CMAKE_ARGV4} RAW_STRING_CONTENT)
+  set(RAW_STRING_CONTENT "R\"${RAW_STRING_DELIM}(${RAW_STRING_CONTENT})${RAW_STRING_DELIM}\"")
+  file(WRITE ${CMAKE_ARGV3} "${RAW_STRING_CONTENT}")
+  message(STATUS "recreated ${CMAKE_ARGV3} from ${CMAKE_ARGV4}" )
+endif()

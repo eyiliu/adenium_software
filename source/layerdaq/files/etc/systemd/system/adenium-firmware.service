@@ -1,0 +1,10 @@
+[Unit]
+Description=adenium beam telescope service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/sh /boot/efi/loadfirmware.sh
+
+[Install]
+WantedBy=multi-user.target

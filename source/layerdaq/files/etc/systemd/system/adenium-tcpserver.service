@@ -1,0 +1,16 @@
+[Unit]
+Description=adenium beam telescope service: tcp server
+Wants=adenium-firmware.service
+After=adenium-firmware.service
+StartLimitIntervalSec=500
+StartLimitBurst=20
+StartLimitAction=reboot-immediate
+
+[Service]
+Type=simple
+ExecStart=/boot/efi/testserver 0
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

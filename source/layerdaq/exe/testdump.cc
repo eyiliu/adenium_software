@@ -7,6 +7,7 @@
 #include <chrono>
 #include <filesystem>
 #include <future>
+#include <thread>
 
 #include <signal.h>
 #include <fcntl.h>
